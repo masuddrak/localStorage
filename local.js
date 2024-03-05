@@ -6,7 +6,7 @@ const addToCard = () => {
     productName.value = ""
     productQuntity.value = ""
     displayAddedProduct(productNameValue, productQuntityValue)
-    saveStoredCard(productNameValue,productQuntityValue)
+    saveStoredCard(productNameValue, productQuntityValue)
 }
 
 const displayAddedProduct = (product, quntity) => {
@@ -17,20 +17,29 @@ const displayAddedProduct = (product, quntity) => {
 
 }
 const getLoacalStorage = () => {
-    let card={}
-    const getCard=localStorage.getItem("card")
-    if(getCard){
-           card=JSON.parse(getCard) 
+    let card = {}
+    const getCard = localStorage.getItem("card")
+    if (getCard) {
+        card = JSON.parse(getCard)
     }
     return card
 }
 
 
-const saveStoredCard=(product,quntity)=>{
-    const card=getLoacalStorage()
-    card[product]=quntity
+const saveStoredCard = (product, quntity) => {
+    const card = getLoacalStorage()
+    card[product] = quntity
 
-    const cardStringify=JSON.stringify(card)
+    const cardStringify = JSON.stringify(card)
     console.log(card)
-    localStorage.setItem("card",cardStringify)
+    localStorage.setItem("card", cardStringify)
 }
+const displayLocalStorageData = () => {
+    const saveCard = getLoacalStorage()
+
+    for (const product in saveCard) {
+
+        displayAddedProduct(product,saveCard[product])
+    }
+}
+displayLocalStorageData()
